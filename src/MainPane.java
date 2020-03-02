@@ -1,6 +1,4 @@
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -9,8 +7,8 @@ import java.util.ArrayList;
 
 public class MainPane extends HBox {
 
-    private VBox leftPane;
-    private GridPane comingUpPane, addAssignmentPane, editCoursesPane;
+    private VBox leftPane, editCoursesPane;
+    private GridPane comingUpPane, addAssignmentPane;
     private MainPane mainPane;
 
     public MainPane(ArrayList<Assignment> assignmentsList, ArrayList<Course> coursesList){
@@ -26,9 +24,9 @@ public class MainPane extends HBox {
         mainPane = this;
     }
 
-    public void editCourses(){
+    public void showUpdateCoursesPane(){
         mainPane.getChildren().clear();
-        mainPane.getChildren().addAll(leftPane, addAssignmentPane);
+        mainPane.getChildren().addAll(leftPane, editCoursesPane);
     }
 
 }

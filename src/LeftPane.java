@@ -7,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
 import java.util.ArrayList;
 
 public class LeftPane extends VBox {
@@ -18,9 +17,12 @@ public class LeftPane extends VBox {
     private ScrollPane scrollingVBoxHolder;
     private VBox listHolder;
     private HBox mainPane;
+    private ArrayList<Course> coursesList;
 
     public LeftPane(ArrayList<Course> coursesList, ArrayList<Assignment> assignmentsList, MainPane mainPane){
+
         this.mainPane = mainPane;
+        this.coursesList = coursesList;
 
         comingUpButton = new Button("Coming Up");
         comingUpButton.setPrefWidth(400);
@@ -42,8 +44,9 @@ public class LeftPane extends VBox {
         scrollingVBoxHolder = new ScrollPane(listHolder);
         scrollingVBoxHolder.setPrefHeight(400);
 
-        for (int i = 0; i < coursesList.size(); i++)
+        for (int i = 0; i < coursesList.size(); i++) {
             listHolder.getChildren().addAll(new Label(coursesList.get(i).toString()));
+        }
 
         this.setPadding(new Insets(20,10,20,10));
         this.setSpacing(15);
@@ -51,8 +54,14 @@ public class LeftPane extends VBox {
         this.getChildren().addAll(comingUpButton, addAssignmentButton, alignmentBox, scrollingVBoxHolder);
         this.setAlignment(Pos.TOP_LEFT);
 
-        editButton.setOnAction(event -> mainPane.editCourses());
+        editButton.setOnAction(event -> mainPane.showUpdateCoursesPane());
 
+    }
+
+    public void updatedCoursesList(){
+        for (int i = 0; i < coursesList.size(); i++) {
+            listHolder.getChildren().addAll(new Label(coursesList.get(i).toString()));
+        }
     }
 
 }

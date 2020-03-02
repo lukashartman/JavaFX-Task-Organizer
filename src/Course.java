@@ -7,6 +7,8 @@ public class Course {
         courseProfessor = prof;
         courseLocation = location;
 
+        System.out.print(this.toString());
+
     }
 
     public String toString(){
