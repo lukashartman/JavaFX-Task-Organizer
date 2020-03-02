@@ -12,5 +12,10 @@ public class Assignment {
         assignmentName = name;
     }
 
+    public String toString(){
+        String temp;
+        temp = "Assignment Name: " + assignmentName;
+        return temp;
+    }
 
 }

@@ -6,6 +6,12 @@ public class Course {
         courseTitle = title;
         courseProfessor = prof;
         courseLocation = location;
+
+    }
+
+    public String toString(){
+        String temp = "Class Name: " + courseTitle;
+        return temp;
     }
 
 
