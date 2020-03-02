@@ -7,7 +7,7 @@ public class ComingUpPane extends GridPane {
 
     private Label testLabel, testLabel2;
 
-    public ComingUpPane(ArrayList<Assignment> assignmentsList){
+    public ComingUpPane(){
         testLabel = new Label("Testing");
         testLabel2 = new Label("Some More");
 

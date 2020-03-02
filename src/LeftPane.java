@@ -7,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import java.util.ArrayList;
 
 public class LeftPane extends VBox {
 
@@ -16,13 +15,11 @@ public class LeftPane extends VBox {
     private HBox alignmentBox;
     private ScrollPane scrollingVBoxHolder;
     private VBox listHolder;
-    private HBox mainPane;
-    private ArrayList<Course> coursesList;
+    private MainPane mainPane;
 
-    public LeftPane(ArrayList<Course> coursesList, ArrayList<Assignment> assignmentsList, MainPane mainPane){
+    public LeftPane(MainPane mainPane){
 
         this.mainPane = mainPane;
-        this.coursesList = coursesList;
 
         comingUpButton = new Button("Coming Up");
         comingUpButton.setPrefWidth(400);
@@ -44,8 +41,8 @@ public class LeftPane extends VBox {
         scrollingVBoxHolder = new ScrollPane(listHolder);
         scrollingVBoxHolder.setPrefHeight(400);
 
-        for (int i = 0; i < coursesList.size(); i++) {
-            listHolder.getChildren().addAll(new Label(coursesList.get(i).toString()));
+        for (int i = 0; i < Main.coursesList.size(); i++) {
+            listHolder.getChildren().add(new Label(Main.coursesList.get(i).toString()));
         }
 
         this.setPadding(new Insets(20,10,20,10));
@@ -55,12 +52,16 @@ public class LeftPane extends VBox {
         this.setAlignment(Pos.TOP_LEFT);
 
         editButton.setOnAction(event -> mainPane.showUpdateCoursesPane());
+        addAssignmentButton.setOnAction(event -> mainPane.showAddAssignmentPane());
+        comingUpButton.setOnAction(event -> mainPane.showComingUpPane());
 
     }
 
-    public void updatedCoursesList(){
-        for (int i = 0; i < coursesList.size(); i++) {
-            listHolder.getChildren().addAll(new Label(coursesList.get(i).toString()));
+    public void updateCoursesList(){
+        System.out.println(Main.coursesList.size());
+        listHolder.getChildren().clear();
+        for (int i = 0; i < Main.coursesList.size(); i++) {
+            listHolder.getChildren().addAll(new Label(Main.coursesList.get(i).toString()));
         }
     }
 

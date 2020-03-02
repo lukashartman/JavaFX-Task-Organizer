@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -9,8 +7,8 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    private ArrayList<Assignment> assignmentsList;
-    private ArrayList<Course> coursesList;
+    public static ArrayList<Assignment> assignmentsList;
+    public static ArrayList<Course> coursesList;
 
     private Stage window;
     private Scene scene1;
@@ -22,10 +20,10 @@ public class Main extends Application {
     }
 
     public void start (Stage primaryStage) throws Exception{
+
+
         window = primaryStage;
-        assignmentsList = new ArrayList<Assignment>();
-        coursesList = new ArrayList<Course>();
-        mainPane = new MainPane(assignmentsList, coursesList);
+        mainPane = new MainPane();
 
         scene1 = new Scene(mainPane, 900, 400);
 
