@@ -1,21 +1,27 @@
+import java.time.LocalDate;
+
 public class Assignment {
 
-    private int dayDue, monthDue, yearDue;
     private Course assignmentCourse;
     private String assignmentName;
+    private LocalDate dueDate;
 
-    public Assignment(int day, int month, int year, Course assignmentCourse, String name){
+    public Assignment(LocalDate dueDate, Course assignmentCourse, String name){
         this.assignmentCourse = assignmentCourse;
-        dayDue = day;
-        monthDue = month;
-        yearDue = year;
+        this.dueDate = dueDate;
         assignmentName = name;
     }
 
     public String toString(){
         String temp;
-        temp = "Assignment Name: " + assignmentName;
+        temp = "\nAssignment Name: " + assignmentName;
+        temp += "\nDue Date: " + dueDate;
+        temp += "\nCourse: " + assignmentCourse.getCourseTitle();
         return temp;
+    }
+
+    public LocalDate getDueDate(){
+        return dueDate;
     }
 
 }

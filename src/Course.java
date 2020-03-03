@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 public class Course {
 
     private String courseTitle, courseProfessor, courseLocation;
@@ -12,8 +14,12 @@ public class Course {
     }
 
     public String toString(){
-        String temp = "Class Name: " + courseTitle;
+        String temp = "Course Title: " + courseTitle;
         return temp;
+    }
+
+    public String getCourseTitle(){
+        return courseTitle;
     }
 
 

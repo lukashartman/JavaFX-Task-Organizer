@@ -53,7 +53,7 @@ public class EditCoursesPane extends VBox {
         this.getChildren().addAll(inputInfoPane, saveButton, exitButton);
 
         saveButton.setOnAction(new SaveButtonHandler(leftPane));
-        exitButton.setOnAction(event -> mainPane.showComingUpPane());
+        exitButton.setOnAction(event -> mainPane.showWeeklyPane());
     }
 
     private class SaveButtonHandler implements EventHandler<ActionEvent>

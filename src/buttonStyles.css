@@ -1,0 +1,58 @@
+.sideButtons{
+    -fx-background-color: #000B95;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-pref-width: 250;
+    -fx-pref-height: 48;
+}
+.sideButtons:hover{
+    -fx-background-color: #2700CB;
+}
+.activeSideButtons{
+     -fx-background-color: #2700CB;
+     -fx-borderwidth: 0;
+     -fx-font-family: Avenir Next Condensed;
+     -fx-font-size: 20;
+     -fx-text-fill: white;
+     -fx-alignment: center;
+    -fx-pref-width: 250;
+    -fx-pref-height: 48;
+}
+.activeSideButtons:hover{
+    -fx-background-color: #2700CB;
+}
+.newTaskButton {
+    -fx-background-color: #2700CB;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+}
+.coursesScrollPane{
+    -fx-background-color: transparent;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-pref-height: 150;
+}
+.coursesLabel{
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+.todayViewHeaderLabels{
+    -fx-font-family: Avenir Next;
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
+}
+.activeButton{
+    -fx-background-color: #000B95;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}

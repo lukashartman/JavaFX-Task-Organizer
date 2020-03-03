@@ -25,7 +25,9 @@ public class Main extends Application {
         window = primaryStage;
         mainPane = new MainPane();
 
-        scene1 = new Scene(mainPane, 900, 400);
+        scene1 = new Scene(mainPane, 950, 400);
+        scene1.getStylesheets().add("buttonStyles.css");
+
 
         window.setScene(scene1);
         window.setTitle("Your Agenda");
