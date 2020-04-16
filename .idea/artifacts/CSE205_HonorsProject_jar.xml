@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CSE205-HonorsProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CSE205_HonorsProject_jar</output-path>
+    <root id="archive" name="CSE205-HonorsProject.jar">
+      <element id="module-output" name="CSE205-HonorsProject" />
+    </root>
+  </artifact>
+</component>

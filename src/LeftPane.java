@@ -11,10 +11,8 @@ import javafx.scene.text.Font;
 
 public class LeftPane extends VBox {
 
-    public static Button weeklyButton, todayButton, viewAllButton, addAssignmentButton;
-    private Label coursesLabel, titleLabel;
-    private ScrollPane scrollingVBoxHolder;
-    private VBox listHolderVBox;
+    public static Button weeklyButton, todayButton, viewAllButton, coursesButton, addAssignmentButton;
+    private Label titleLabel;
     private MainPane mainPane;
     private HBox headerPane;
 
@@ -22,16 +20,8 @@ public class LeftPane extends VBox {
 
         this.mainPane = mainPane;
 
-        //REMOVE ME EVENTUALLY
-        Main.coursesList.add(new Course("CSE 205", "Navabi", "Life Sciences"));
-
-
-        listHolderVBox = new VBox();
-        scrollingVBoxHolder = new ScrollPane(listHolderVBox);
-        scrollingVBoxHolder.getStyleClass().add("coursesScrollPane");
-
         weeklyButton = new Button("Weekly");
-        weeklyButton.getStyleClass().add("sideButtons");
+        weeklyButton.getStyleClass().add("activeSideButtons");
 
         todayButton = new Button("Today");
         todayButton.getStyleClass().add("sideButtons");
@@ -40,21 +30,15 @@ public class LeftPane extends VBox {
         viewAllButton.getStyleClass().add("sideButtons");
 
         addAssignmentButton = new Button("+ Task");
-        addAssignmentButton.setPrefWidth(75);
-        addAssignmentButton.setPrefHeight(25);
         addAssignmentButton.getStyleClass().add("newTaskButton");
 
-        coursesLabel = new Label("Courses");
-        coursesLabel.getStyleClass().add("coursesLabel");
+        coursesButton = new Button("Courses");
+        coursesButton.getStyleClass().add("sideButtons");
 
         titleLabel = new Label("Agenda");
         titleLabel.setFont(new Font("Avenir Next Heavy", 30));
         titleLabel.setTextFill(Color.WHITE);
         titleLabel.setAlignment(Pos.CENTER);
-
-        for (int i = 0; i < Main.coursesList.size(); i++) {
-            listHolderVBox.getChildren().add(new CheckBox(Main.coursesList.get(i).toString()));
-        }
 
         headerPane = new HBox();
         headerPane.getChildren().addAll(titleLabel, addAssignmentButton);
@@ -64,7 +48,7 @@ public class LeftPane extends VBox {
         this.setPadding(new Insets(5,0,5,0));
         this.setSpacing(8);
         this.setBackground(new Background(new BackgroundFill(Color.rgb(0,11,149), null, null)));
-        this.getChildren().addAll(headerPane, weeklyButton, todayButton, viewAllButton, coursesLabel, scrollingVBoxHolder);
+        this.getChildren().addAll(headerPane, weeklyButton, todayButton, viewAllButton, coursesButton);
         this.setAlignment(Pos.TOP_CENTER);
 
         //todayButton.setOnAction(event -> mainPane.showTodayPane());
@@ -72,16 +56,7 @@ public class LeftPane extends VBox {
         weeklyButton.setOnAction(event -> mainPane.showWeeklyPane());
         todayButton.setOnAction(event -> mainPane.showTodayPane());
         viewAllButton.setOnAction(event -> mainPane.showAllAssignmentsPane());
-    }
-
-    public void updateCoursesList() {
-        System.out.println(Main.coursesList.size());
-        listHolderVBox.getChildren().clear();
-        for (int i = 0; i < Main.coursesList.size(); i++) {
-            CheckBox tempCheck = new CheckBox(Main.coursesList.get(i).toString());
-            listHolderVBox.getChildren().addAll(tempCheck);
-            //tempCheck.setOnAction(); Set on action check
-        }
+        coursesButton.setOnAction(event -> mainPane.showEditCoursesPane());
     }
 
 }

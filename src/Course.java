@@ -1,6 +1,6 @@
-import java.util.Calendar;
+import java.io.Serializable;
 
-public class Course {
+public class Course implements Serializable{
 
     private String courseTitle, courseProfessor, courseLocation;
 

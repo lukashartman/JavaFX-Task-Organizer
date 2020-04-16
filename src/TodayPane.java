@@ -1,4 +1,6 @@
+import com.sun.tools.javac.comp.Check;
 import javafx.geometry.Insets;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -35,11 +37,11 @@ public class TodayPane extends HBox {
         tomorrowVbox.setPrefWidth(350);
 
 
-        for (int i = 0; i < Main.assignmentsList.size(); i++){
-            if (Main.assignmentsList.get(i).getDueDate().equals(LocalDate.now())){
-                todayVbox.getChildren().add(new Label(Main.assignmentsList.get(i).toString()));
-            }else if(Main.assignmentsList.get(i).getDueDate().equals(LocalDate.now().plusDays(1))) {
-                tomorrowVbox.getChildren().add(new Label(Main.assignmentsList.get(i).toString()));
+        for (int i = 0; i < Main.assignmentsList.size(); i++) {
+            if (Main.assignmentsList.get(i).getDueDate().equals(LocalDate.now())) {
+                todayVbox.getChildren().add(new CheckBox(Main.assignmentsList.get(i).toString()));
+            } else if (Main.assignmentsList.get(i).getDueDate().equals(LocalDate.now().plusDays(1))) {
+                tomorrowVbox.getChildren().add(new CheckBox(Main.assignmentsList.get(i).toString()));
             }
         }
 
@@ -48,11 +50,18 @@ public class TodayPane extends HBox {
 
     }
 
-    public void updateAssignmentsToday(Assignment tempAssignment){
-        if (tempAssignment.getDueDate().equals(LocalDate.now())){
-            todayVbox.getChildren().add(new Label(tempAssignment.toString()));
-        }else if(tempAssignment.getDueDate().equals(LocalDate.now().plusDays(1))) {
-            tomorrowVbox.getChildren().add(new Label(tempAssignment.toString()));
+    public static void updateTodayPane() {
+        todayVbox.getChildren().removeIf(CheckBox.class::isInstance);
+        tomorrowVbox.getChildren().removeIf(CheckBox.class::isInstance);
+
+
+        for (int i = 0; i < Main.assignmentsList.size(); i++) {
+            if (LocalDate.now().equals(Main.assignmentsList.get(i).getDueDate())) {
+                todayVbox.getChildren().add(new CheckBox(Main.assignmentsList.get(i).toString()));
+            } else if (LocalDate.now().plusDays(1).equals(Main.assignmentsList.get(i).getDueDate())) {
+                tomorrowVbox.getChildren().add(new CheckBox(Main.assignmentsList.get(i).toString()));
+            }
         }
     }
+
 }
