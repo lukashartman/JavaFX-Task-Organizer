@@ -1,0 +1,118 @@
+
+/*CATEGORY 1: BUTTONS*/
+.sideButtons{
+    -fx-background-color: #000B95;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-pref-width: 250;
+    -fx-pref-height: 40;
+}
+.sideButtons:hover{
+    -fx-background-color: #2700CB;
+}
+.activeSideButtons{
+     -fx-background-color: #2700CB;
+     -fx-borderwidth: 0;
+     -fx-font-family: Avenir Next Condensed;
+     -fx-font-size: 20;
+     -fx-text-fill: white;
+     -fx-alignment: center;
+    -fx-pref-width: 250;
+    -fx-pref-height: 40;
+}
+.activeSideButtons:hover{
+    -fx-background-color: #2700CB;
+}
+
+
+.newTaskButton {
+    -fx-background-color: #2700CB;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-pref-height: 25;
+    -fx-pref-width: 75;
+}
+
+.removeButton {
+    -fx-background-color: #2700CB;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-pref-height: 25;
+}
+
+.saveButton{
+    -fx-background-color: #2700CB;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-text-fill: white;
+}
+
+.activeButton{
+    -fx-background-color: #000B95;
+    -fx-borderwidth: 0;
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+/*CATEGORY 2: LABELS*/
+.coursesLabel{
+    -fx-font-family: Avenir Next Condensed;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+.todayViewHeaderLabels{
+    -fx-font-family: Avenir Next;
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
+}
+
+/*CATEGORY 3: PANES*/
+.weeklyViewVbox{
+    -fx-background-color: white;
+    -fx-borderwidth: 3;
+    -fx-border-color: black;
+    -fx-pref-width: 210;
+    -fx-pref-height: 170;
+}
+
+/*CATEGORY 4: MISC. INTERACTIVE NODES*/
+.text-field {
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-max-width: 189;
+    -fx-background-color: #f3f0f0;
+}
+.text-field:focused {
+    -fx-background-color: #2700CB, #f3f0f0;
+}
+
+
+.check-box {
+    selected-box-color: #2700CB;
+    box-color: #000B95;
+    mark-color: white;
+    -fx-padding: 2 2 2 2;
+}
+.check-box:selected > .box {
+    -fx-background-color: selected-box-color;
+}
+.check-box > .box {
+    -fx-background-color: box-color;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: mark-color;
+}
+.combo-box-base
+{
+    -fx-background-color: #f3f0f0;
+}
