@@ -1,144 +1,151 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.StageStyle;
 
 public class AddAssignmentPane extends HBox {
 
+    //Instance variables
     private Label assignmentTitleLabel, assignmentCourseLabel, assignmentDueDateLabel, assignmentsForCourseLabel;
     private TextField assingmentTitleField;
     private Button saveButton;
     private static ComboBox<String> courseSelectcb;
     private DatePicker datePicker;
-    private LeftPane leftPane;
-    private MainPane mainPane;
-    private TodayPane todayPane;
     private VBox leftHalf, rightHalf;
     private Line dividerLine;
 
 
-    public AddAssignmentPane(LeftPane leftPane, MainPane mainPane, TodayPane todayPane) {
+    public AddAssignmentPane() {
 
-        this.leftPane = leftPane;
-        this.mainPane = mainPane;
-        this.todayPane = todayPane;
-
+        //Create and setup left half of pane
         leftHalf = new VBox();
-        leftHalf.setPadding(new Insets(15,5,5,15));
+        leftHalf.setPadding(new Insets(15, 5, 5, 15));
         leftHalf.setPrefWidth(350);
         leftHalf.setAlignment(Pos.TOP_CENTER);
         leftHalf.setSpacing(5);
 
+        //Create and setup right half of pane
         rightHalf = new VBox();
-        rightHalf.setPadding(new Insets(5,5,5,15));
+        rightHalf.setPadding(new Insets(5, 5, 5, 15));
         rightHalf.setPrefWidth(350);
 
+        //Setup all labels with correct font
         assignmentTitleLabel = new Label("Title");
         assignmentTitleLabel.setFont(new Font("Avenir Next Condensed Bold", 20));
-        assignmentTitleLabel.setTextFill(Color.BLACK);
 
         assignmentCourseLabel = new Label("Course");
         assignmentCourseLabel.setFont(new Font("Avenir Next Condensed Bold", 20));
-        assignmentCourseLabel.setTextFill(Color.BLACK);
 
         assignmentDueDateLabel = new Label("Due Date");
         assignmentDueDateLabel.setFont(new Font("Avenir Next Condensed Bold", 20));
-        assignmentDueDateLabel.setTextFill(Color.BLACK);
 
+        //Label will be dynamically set later
         assignmentsForCourseLabel = new Label("");
         assignmentsForCourseLabel.setFont(new Font("Avenir Next Condensed Bold", 20));
-        assignmentsForCourseLabel.setTextFill(Color.BLACK);
 
+        //Setup all input methods for user
         assingmentTitleField = new TextField();
-
         datePicker = new DatePicker();
-
         courseSelectcb = new ComboBox<>();
+        courseSelectcb.setPrefWidth(189);
+        courseSelectcb.setOnAction(new SelectionHandler());
+
+        //Call method to add most recent list of courses to CB
         updateCourseSelectcb();
 
-        courseSelectcb.setPrefWidth(189);
-
+        //Setup save button
         saveButton = new Button("Save");
         saveButton.getStyleClass().add("saveButton");
+        saveButton.setOnAction(new SaveButtonHandler());
 
-        dividerLine = new Line(350,0,350,400);
+        //Setup of a line to divide left from right halves
+        dividerLine = new Line(350, 0, 350, 400);
 
-        this.setAlignment(Pos.CENTER);
+        //Add relevent nodes to left and right half vboxes
         leftHalf.getChildren().addAll(assignmentTitleLabel, assingmentTitleField, assignmentCourseLabel, courseSelectcb, assignmentDueDateLabel, datePicker, saveButton);
         rightHalf.getChildren().addAll(assignmentsForCourseLabel);
+
+        //Add the left and right half vboxes and divider line to entire pane
         this.getChildren().addAll(leftHalf, dividerLine, rightHalf);
-        saveButton.setOnAction(new SaveButtonHandler());
-        courseSelectcb.setOnAction(new SelectionHandler());
     }
 
+    //Method to update the course selection combobox
+    public static void updateCourseSelectcb() {
+
+        //Remove all items from CB
+        courseSelectcb.getItems().clear();
+
+        //Cycle through courses list and add all items to CB
+        for (int i = 0; i < Main.coursesList.size(); i++) {
+            courseSelectcb.getItems().add(Main.coursesList.get(i).getCourseTitle());
+        }
+    }
+
+    //Create nested class Event Handler for CB selection
     private class SelectionHandler implements EventHandler<ActionEvent> {
-        //Override the abstact method handle()
+
         public void handle(ActionEvent event) {
-            if (courseSelectcb.getValue() != null ) {
+
+            //Make sure combobox has a selection
+            if (courseSelectcb.getValue() != null) {
+
+                //Remove all current checkboxes from rightHalf pane
                 rightHalf.getChildren().removeIf(CheckBox.class::isInstance);
 
+                //Cycle through course list and find selected item from CB
                 for (int i = 0; i < Main.coursesList.size(); i++) {
                     if (courseSelectcb.getValue().equals(Main.coursesList.get(i).getCourseTitle())) {
                         assignmentsForCourseLabel.setText("All " + courseSelectcb.getValue() + " Assignments");
                     }
                 }
 
+                //Cycle through assignments list and create new checkboxes for all assignments in selected course
                 for (int i = 0; i < Main.assignmentsList.size(); i++) {
                     if (courseSelectcb.getValue().equals(Main.assignmentsList.get(i).getCourse().getCourseTitle())) {
                         rightHalf.getChildren().add(new CheckBox(Main.assignmentsList.get(i).getAssignmentName() + ": " + Main.assignmentsList.get(i).getDueDate()));
                     }
                 }
 
-            }else{
+            //If there is no selection, set label to default text
+            } else {
                 assignmentsForCourseLabel.setText("Select Course");
             }
         }
     }
 
-    public static void updateCourseSelectcb(){
-        courseSelectcb.getItems().clear();
-
-        for (int i = 0; i < Main.coursesList.size(); i++) {
-            courseSelectcb.getItems().add(Main.coursesList.get(i).getCourseTitle());
-        }
-    }
-
-
-
+    //Create nested class Event Handler for save button action
     private class SaveButtonHandler implements EventHandler<ActionEvent> {
 
-        //Override the abstact method handle()
         public void handle(ActionEvent event) {
 
-            if (courseSelectcb.getSelectionModel().isEmpty() && datePicker.getValue()!=null && assingmentTitleField.getText()!=null) {
+            //Ensure all fields have been filled
+            if (!courseSelectcb.getSelectionModel().isEmpty() && datePicker.getValue() != null && assingmentTitleField.getText() != null) {
+
+                //Cycle through course list and find which course has been selected
                 for (int i = 0; i < Main.coursesList.size(); i++) {
                     if (courseSelectcb.getValue().equals(Main.coursesList.get(i).getCourseTitle())) {
 
+                        //Create temp variable to hold new assignment and add to assignments list
                         Assignment tempAssignment = new Assignment(datePicker.getValue(), Main.coursesList.get(i), assingmentTitleField.getText());
-
                         Main.assignmentsList.add(tempAssignment);
 
-                        System.out.println(Main.assignmentsList.toString() + "\n");
-
+                        //Call all methods to update all panes for new assignment
                         WeeklyPane.updateWeeklyPane();
                         TodayPane.updateTodayPane();
                         AllAssignmentsPane.updateAllAssignmentsPane();
 
+                        //Clear input fields
                         courseSelectcb.setValue(null);
                         datePicker.setValue(null);
                         assingmentTitleField.clear();
                         break;
                     }
                 }
-            }else{
+            //Otherwise, display alert to user
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText("Please fill all fields and try again.");
